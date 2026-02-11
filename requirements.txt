@@ -1,6 +1,7 @@
 streamlit
 opencv-python
-zxing
+# zxing
+pyzbar
 requests
 numpy
 pillow

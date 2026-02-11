@@ -1,0 +1,58 @@
+{
+    "name": "abcmart",
+    "schema": {
+        "images": [
+            "items",
+            0,
+            "images"
+        ],
+        "brand": [
+            "items",
+            0,
+            "brand"
+        ],
+        "category": [
+            "items",
+            0,
+            "category"
+        ],
+        "title": [
+            "items",
+            0,
+            "title"
+        ]
+    },
+    "invoice_schema": {
+        "items": [
+            "items"
+        ],
+        "total_quantity": [
+            "total_quantity"
+        ],
+        "total": [
+            "total"
+        ],
+        "date": [
+            "date"
+        ]
+    },
+    "send_invoice_to": {
+        "url": "https://api.abcmart.in/v1/invoice",
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json",
+            "x-api-key": "YOUR_API_KEY"
+        }
+    },
+    "pay_to": {
+        "pa": "your-upi-id@bank",
+        "pn": "Your Name",
+        "url": [
+            "upi://pay",
+            "pa",
+            "pn",
+            "am",
+            "cu=INR"
+        ]
+    }
+}

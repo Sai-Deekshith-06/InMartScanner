@@ -206,7 +206,7 @@ def show_cart_ui():
             with c3:
                 cc1, cc2, cc3 = st.columns([1, 1, 1])
                 with cc1:
-                    if st.button('',icon="➖", key=f"minus_{index}"):
+                    if st.button("",icon="➖", key=f"minus_{index}"):
                         st.session_state.cart[item]["qty"] -= 1
                 with cc2:
                     st.markdown(
@@ -214,7 +214,7 @@ def show_cart_ui():
                         unsafe_allow_html=True
                     )
                 with cc3:
-                    if st.button("➕", key=f"plus_{index}"):
+                    if st.button("",icon="➕", key=f"plus_{index}"):
                         st.session_state.cart[item]["qty"] += 1
 
         st.markdown("---")
@@ -248,7 +248,8 @@ with left:
     st.markdown("### 🔍 Scan Mode")
     mode = st.radio(
         "",
-        ["📷 Camera (Auto Scan)", "🖼 Upload Image", "⌨ Manual Barcode"]
+        ["📷 Camera (Auto Scan)", "🖼 Upload Image", "⌨ Manual Barcode"],
+        label_visibility="collapsed"
     )
     barcode_value = None
 
@@ -263,7 +264,7 @@ with left:
 
         # Camera widget (always rendered)
         with st.popover("Point your camera at a barcode and take a picture of it.", use_container_width=True):
-            img = st.camera_input("")
+            img = st.camera_input("Take a photo")
 
         if img:
             # Generate a stable ID from image bytes

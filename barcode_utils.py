@@ -1,18 +1,28 @@
-import zxing
+from pyzbar.pyzbar import decode
+from PIL import Image
 import requests
 
-reader = zxing.BarCodeReader()
-RAPID_API_KEY = "32d4e13869mshe58c8ba195ec19bp1992bcjsn25302358262e"
+import os
+RAPID_API_KEY = os.getenv("RAPID_API_KEY")
+
+if not RAPID_API_KEY:
+    raise RuntimeError("RAPID_API_KEY is not set")
 
 def decode_barcode_image(image_path):
-    barcode = reader.decode(image_path)
-    if barcode:
-        return {
-            "value": barcode.parsed,
-            "format": barcode.format
-        }
-    return None
+    try:
+        img = Image.open(image_path).convert("RGB")
+    except Exception:
+        return None
 
+    results = decode(img)
+    if not results:
+        return None
+
+    barcode = results[0]
+    return {
+        "value": barcode.data.decode("utf-8", errors="replace"),
+        "format": barcode.type
+    }
 
 def lookup_item_upcitemdb(barcode):
     url = f"https://api.upcitemdb.com/prod/trial/lookup?upc={barcode}"
